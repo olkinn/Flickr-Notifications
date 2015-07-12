@@ -3,7 +3,6 @@ var path = require('path');
 var request = require('request');
 var async = require('async');
 
-
 var BASE_URL = 'https://api.flickr.com/services/rest/';
 var API_KEY = process.env.FLICKR_API_KEY;
 var API_LIMIT = 3600; 
@@ -21,10 +20,8 @@ var getPhotosForUserId = function(userId, photoNumber, callback){
             return ph.id;
         });
         callback(photoIds);
-        // console.log(photoIds);
     });
 };
-
 
 var getNumberOfFavs = function(photoId, callback){
     var method = 'flickr.photos.getFavorites';
@@ -57,7 +54,6 @@ var getAllComments = function(idArray, callback){
         callback(result);
     });
 };
-
 
 var getFavsByUserId = function(userId, photoNumber, callback){
     getPhotosForUserId(userId, photoNumber, function(ids){
@@ -98,7 +94,7 @@ var notify = function(message){
 var checkFavs = function(userId, photoNumber, timeInterval){
     var previousFavs = [];
     var newFavs;
-
+    
     setInterval(function(){
         getFavsByUserId(userId, photoNumber, function(favs){
             newFavs = favs;
@@ -124,8 +120,6 @@ var checkComments = function(userId, photoNumber, timeInterval){
         });
     }, timeInterval);
 };
-
-
 
 var checkForUpdates = function(userId, photoNumber, timeInterval){
     //API_LIMIT/2 because checkFavs works in parallel with checkComments
