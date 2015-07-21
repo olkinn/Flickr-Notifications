@@ -2,6 +2,7 @@ var notifier = require('node-notifier');
 var path = require('path');
 var request = require('request');
 var async = require('async');
+var open = require('open');
 
 var BASE_URL = 'https://api.flickr.com/services/rest/';
 var API_KEY = process.env.FLICKR_API_KEY;
@@ -83,6 +84,7 @@ var notify = function(message){
     });
 
     notifier.on('click', function (notifierObject, options) {
+        open('https://www.flickr.com/activity');
         // Happens if `wait: true` and user clicks notification
     });
 
